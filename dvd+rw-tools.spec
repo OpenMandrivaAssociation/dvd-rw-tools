@@ -10,7 +10,10 @@ Release:        %{release}
 License:	GPL+
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.bz2
 Source1:	dvd+rw-mediainfo.1
-Patch:		dvd+rw-tools-7.0-cdrkit.patch
+Patch0:		dvd+rw-tools-7.0-cdrkit.patch
+# Fixes incompatible pointer type errors during build. From 
+# http://trac.opensde.org/ticket/8 - AdamW 2007/09
+Patch1:		dvd+rw-tools-7.0-pointer.patch
 URL:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Requires:	cdrkit-genisoimage
@@ -31,7 +34,8 @@ optical media.
 %prep
 
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1 -b .pointer
 
 %build
 
