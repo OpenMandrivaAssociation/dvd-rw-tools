@@ -15,6 +15,7 @@ Patch0:		dvd+rw-tools-7.0-cdrkit.patch
 # http://trac.opensde.org/ticket/8 - AdamW 2007/09
 Patch1:		dvd+rw-tools-7.0-pointer.patch
 URL:		http://fy.chalmers.se/~appro/linux/DVD+RW/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Requires:	cdrkit-genisoimage
 
 %description 
