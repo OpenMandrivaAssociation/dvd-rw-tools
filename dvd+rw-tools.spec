@@ -14,6 +14,7 @@ Patch0:		dvd+rw-tools-7.0-cdrkit.patch
 # Fixes incompatible pointer type errors during build. From 
 # http://trac.opensde.org/ticket/8 - AdamW 2007/09
 Patch1:		dvd+rw-tools-7.0-pointer.patch
+Patch2:		dvd+rw-tools-limits.h_fix.diff
 URL:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Requires:	cdrkit-genisoimage
@@ -36,6 +37,7 @@ optical media.
 %setup -q
 %patch0 -p1
 %patch1 -p1 -b .pointer
+%patch2 -p1
 
 %build
 
