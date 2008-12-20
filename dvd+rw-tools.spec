@@ -1,6 +1,6 @@
 %define name                    dvd+rw-tools
 %define version			7.0
-%define release                 %mkrel 6
+%define release                 %mkrel 7
 
 Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
@@ -41,9 +41,9 @@ optical media.
 
 %build
 
-%make
-%make rpl8
-%make btcflash
+%make CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
+%make rpl8 CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
+%make btcflash CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
 
 %install
 
