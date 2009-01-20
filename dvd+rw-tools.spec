@@ -1,20 +1,27 @@
 %define name                    dvd+rw-tools
-%define version			7.0
-%define release                 %mkrel 7
+%define version			7.1
+%define release                 %mkrel 1
 
 Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
 Name: 		%{name}
 Version:	%{version}
 Release:        %{release}
-License:	GPL+
-Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.bz2
+License:	GPLv2
+Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
-Patch0:		dvd+rw-tools-7.0-cdrkit.patch
-# Fixes incompatible pointer type errors during build. From 
-# http://trac.opensde.org/ticket/8 - AdamW 2007/09
-Patch1:		dvd+rw-tools-7.0-pointer.patch
+# (fc) use genisoimage, not mkisofs by default (SUSE)
+Patch0:		growisofs-genisoimage.patch
+# fix build with gcc 4.3
 Patch2:		dvd+rw-tools-limits.h_fix.diff
+# (fc) Allow burn small images on DVD-DL (Fedora bug #476154)
+Patch3:		dvd+rw-tools-7.0-dvddl.patch
+# (fc) fix widechar overflow (Fedora bug #426068)
+Patch4:		dvd+rw-tools-7.0-wctomb.patch
+# (fc) fix exit status of dvd+rw-format (Fedora bug #243036)
+Patch5:		dvd+rw-tools-7.0-wexit.patch
+# (fc) use rpm_opt_flags (SUSE)
+Patch6:		rpm_opt_flags.diff
 URL:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Requires:	cdrkit-genisoimage
@@ -35,15 +42,17 @@ optical media.
 %prep
 
 %setup -q
-%patch0 -p1
-%patch1 -p1 -b .pointer
-%patch2 -p1
+%patch0 -p1 -b .genisoimage
+%patch2 -p1 -b .limits
+%patch3 -p1 -b .dvddl
+%patch4 -p1 -b .wctomb
+%patch5 -p1 -b .wexit
+%patch6 -p1 -b .rpm_opt_flags
 
 %build
 
-%make CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
-%make rpl8 CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
-%make btcflash CFLAGS="%{optflags}" CXXFLAGS="%{optflags}" LDFLAGS="%{ldflags}"
+%make LDFLAGS="%{ldflags}"
+%make rpl8 btcflash LDFLAGS="%{ldflags}"
 
 %install
 
