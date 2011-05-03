@@ -1,6 +1,6 @@
 %define name                    dvd+rw-tools
 %define version			7.1
-%define release                 %mkrel 4
+%define release                 %mkrel 5
 
 Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
