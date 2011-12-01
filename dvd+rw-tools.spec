@@ -56,9 +56,9 @@ optical media.
 
 %install
 
-make install prefix=$RPM_BUILD_ROOT%{_prefix}
-install -d $RPM_BUILD_ROOT%{_sbindir}
-install -m755 rpl8 $RPM_BUILD_ROOT%{_sbindir}
+make install prefix=%{buildroot}%{_prefix}
+install -d %{buildroot}%{_sbindir}
+install -m755 rpl8 %{buildroot}%{_sbindir}
 
 %clean
 rm -rf %buildroot
