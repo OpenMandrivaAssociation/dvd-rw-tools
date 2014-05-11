@@ -2,13 +2,11 @@ Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
 Name: 		dvd+rw-tools
 Version:	7.1
-Release:        15
+Release:        16
 License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
-# (fc) use genisoimage, not mkisofs by default (SUSE)
-Patch0:		growisofs-genisoimage.patch
 # fix build with gcc 4.3
 Patch2:		dvd+rw-tools-limits.h_fix.diff
 # (fc) Allow burn small images on DVD-DL (Fedora bug #476154)
@@ -19,7 +17,7 @@ Patch4:		dvd+rw-tools-7.0-wctomb.patch
 Patch5:		dvd+rw-tools-7.0-wexit.patch
 # (fc) use rpm_opt_flags (SUSE)
 Patch6:		rpm_opt_flags.diff
-Requires:	cdrkit-genisoimage
+Requires:	mkisofs
 
 %description 
 Even though a modified kernel can let you put for example an ext2 file
