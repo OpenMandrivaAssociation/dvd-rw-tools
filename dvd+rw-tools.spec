@@ -2,7 +2,7 @@ Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
 Name: 		dvd+rw-tools
 Version:	7.1
-Release:        19
+Release:        20
 License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
@@ -17,6 +17,10 @@ Patch4:		dvd+rw-tools-7.0-wctomb.patch
 Patch5:		dvd+rw-tools-7.0-wexit.patch
 # (fc) use rpm_opt_flags (SUSE)
 Patch6:		rpm_opt_flags.diff
+Patch7:		dvd+rw-tools-7.1-noevent.patch
+Patch8:		dvd+rw-tools-7.1-lastshort.patch
+Patch10:	dvd+rw-tools-7.1-bluray_srm+pow.patch
+Patch11:	dvd+rw-tools-7.1-bluray_pow_freespace.patch
 Requires:	mkisofs
 
 %description 
