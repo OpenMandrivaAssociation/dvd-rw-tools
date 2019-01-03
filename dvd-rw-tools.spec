@@ -2,25 +2,24 @@ Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
 Name: 		dvd+rw-tools
 Version:	7.1
-Release:        22
+Release:        23
 License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
-# fix build with gcc 4.3
-Patch2:		dvd+rw-tools-limits.h_fix.diff
-# (fc) Allow burn small images on DVD-DL (Fedora bug #476154)
-Patch3:		dvd+rw-tools-7.0-dvddl.patch
-# (fc) fix widechar overflow (Fedora bug #426068)
-Patch4:		dvd+rw-tools-7.0-wctomb.patch
-# (fc) fix exit status of dvd+rw-format (Fedora bug #243036)
-Patch5:		dvd+rw-tools-7.0-wexit.patch
-# (fc) use rpm_opt_flags (SUSE)
-Patch6:		rpm_opt_flags.diff
+Patch1:		dvd+rw-tools-7.0.manpatch
+Patch2:		dvd+rw-tools-7.0-wexit.patch
+Patch3:		dvd+rw-tools-7.0-glibc2.6.90.patch
+Patch4:		dvd+rw-tools-7.0-reload.patch
+Patch5:		dvd+rw-tools-7.0-wctomb.patch
+Patch6:		dvd+rw-tools-7.0-dvddl.patch
 Patch7:		dvd+rw-tools-7.1-noevent.patch
 Patch8:		dvd+rw-tools-7.1-lastshort.patch
+Patch9:		dvd+rw-tools-7.1-format.patch
 Patch10:	dvd+rw-tools-7.1-bluray_srm+pow.patch
 Patch11:	dvd+rw-tools-7.1-bluray_pow_freespace.patch
+Patch12:	dvd+rw-tools-7.1-sysmacro-inc.patch
+
 Requires:	mkisofs
 
 %description 
@@ -37,13 +36,11 @@ provides the way to both lay down and grow an ISO9660 file system on
 optical media.
 
 %prep
-
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
-%make LDFLAGS="%{ldflags}"
-%make rpl8 btcflash LDFLAGS="%{ldflags}"
+%setup_compile_flags
+%make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK"
 
 %install
 make install prefix=%{buildroot}%{_prefix}
