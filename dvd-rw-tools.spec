@@ -7,6 +7,9 @@ License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
+# (fc) use genisoimage, not mkisofs by default (SUSE)
+Patch0:         growisofs-genisoimage.patch
+# (tpg) Fedora patches
 Patch1:		dvd+rw-tools-7.0.manpatch
 Patch2:		dvd+rw-tools-7.0-wexit.patch
 Patch3:		dvd+rw-tools-7.0-glibc2.6.90.patch
@@ -40,7 +43,8 @@ optical media.
 
 %build
 %setup_compile_flags
-%make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK"
+%make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK" LDFLAGS="%{ldflags}"
+%make_build rpl8 btcflash LDFLAGS="%{ldflags}"
 
 %install
 make install prefix=%{buildroot}%{_prefix}
