@@ -39,6 +39,7 @@ provides the way to both lay down and grow an ISO9660 file system on
 optical media.
 
 %prep
+%setup -q
 %patch0 -p1 -b .genisoimage
 %patch1 -p1 -b .manpatch
 %patch2 -p1 -b .wexit
