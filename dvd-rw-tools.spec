@@ -2,7 +2,7 @@ Summary:	Tools for burning on DVD+RW compliant burner
 Group:          Archiving/Cd burning
 Name: 		dvd+rw-tools
 Version:	7.1
-Release:        23
+Release:        24
 License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
@@ -39,25 +39,12 @@ provides the way to both lay down and grow an ISO9660 file system on
 optical media.
 
 %prep
-%setup -q
-%patch0 -p1 -b .genisoimage
-%patch1 -p1 -b .manpatch
-%patch2 -p1 -b .wexit
-%patch3 -p1 -b .glibc2.6.90
-%patch4 -p1 -b .reload
-%patch5 -p0 -b .wctomb
-%patch6 -p0 -b .dvddl
-%patch7 -p1 -b .noevent
-%patch8 -p1 -b .lastshort
-%patch9 -p1 -b .format
-%patch10 -p1 -b .pow
-%patch11 -p1 -b .freespace
-%patch12 -p1 -b .sysmacro
+%autosetup -p1
 
 %build
 %setup_compile_flags
 %make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK" LDFLAGS="%{ldflags}"
-%make_build rpl8 btcflash LDFLAGS="%{ldflags}"
+%make_build rpl8 LDFLAGS="%{ldflags}"
 
 %install
 make install prefix=%{buildroot}%{_prefix}
