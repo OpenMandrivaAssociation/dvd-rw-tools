@@ -1,14 +1,14 @@
 Summary:	Tools for burning on DVD+RW compliant burner
-Group:          Archiving/Cd burning
-Name: 		dvd+rw-tools
+Group:		Archiving/Cd burning
+Name:		dvd+rw-tools
 Version:	7.1
-Release:        24
+Release:	25
 License:	GPLv2
 Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
 # (fc) use genisoimage, not mkisofs by default (SUSE)
-Patch0:         growisofs-genisoimage.patch
+Patch0:		growisofs-genisoimage.patch
 # (tpg) Fedora patches
 Patch1:		dvd+rw-tools-7.0.manpatch
 Patch2:		dvd+rw-tools-7.0-wexit.patch
@@ -22,10 +22,9 @@ Patch9:		dvd+rw-tools-7.1-format.patch
 Patch10:	dvd+rw-tools-7.1-bluray_srm+pow.patch
 Patch11:	dvd+rw-tools-7.1-bluray_pow_freespace.patch
 Patch12:	dvd+rw-tools-7.1-sysmacro-inc.patch
+Requires:	cdrkit-genisoimage
 
-Requires:	mkisofs
-
-%description 
+%description
 Even though a modified kernel can let you put for example an ext2 file
 system on DVD+RW, it's probably not very practical, because you most
 likely want to access the data on an arbitrary computer. Or in other
@@ -42,9 +41,9 @@ optical media.
 %autosetup -p1
 
 %build
-%setup_compile_flags
-%make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK" LDFLAGS="%{ldflags}"
-%make_build rpl8 LDFLAGS="%{ldflags}"
+%set_build_flags
+%make_build WARN="-DDEFAULT_BUF_SIZE_MB=16 -DRLIMIT_MEMLOCK" LDFLAGS="%{build_ldflags}"
+%make_build rpl8 LDFLAGS="%{build_ldflags}"
 
 %install
 make install prefix=%{buildroot}%{_prefix}
@@ -55,5 +54,4 @@ install -m755 rpl8 %{buildroot}%{_sbindir}
 %doc index.html
 %{_sbindir}/*
 %{_bindir}/*
-%{_mandir}/man1/*
-
+%doc %{_mandir}/man1/*
