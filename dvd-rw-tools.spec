@@ -4,7 +4,7 @@ Name:		dvd+rw-tools
 Version:	7.1
 Release:	26
 License:	GPLv2
-Url:		http://fy.chalmers.se/~appro/linux/DVD+RW/
+Url:		https://fy.chalmers.se/~appro/linux/DVD+RW/
 Source0:	http://fy.chalmers.se/~appro/linux/DVD+RW/tools/dvd+rw-tools-%{version}.tar.gz
 Source1:	dvd+rw-mediainfo.1
 # (fc) use genisoimage, not mkisofs by default (SUSE)
