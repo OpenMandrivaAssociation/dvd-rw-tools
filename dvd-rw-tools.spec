@@ -56,6 +56,6 @@ install -m755 rpl8 %{buildroot}%{_sbindir}
 
 %files
 %doc index.html
-%{_sbindir}/*
+#{_sbindir}/*
 %{_bindir}/*
 %doc %{_mandir}/man1/*
