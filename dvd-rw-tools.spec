@@ -25,6 +25,9 @@ Patch12:	dvd+rw-tools-7.1-sysmacro-inc.patch
 Requires:	cdrkit-genisoimage
 
 BuildRequires:	make
+BuildRequires:  m4
+BuildRequires:  atomic-devel
+
 %description
 Even though a modified kernel can let you put for example an ext2 file
 system on DVD+RW, it's probably not very practical, because you most
@@ -53,6 +56,6 @@ install -m755 rpl8 %{buildroot}%{_sbindir}
 
 %files
 %doc index.html
-%{_sbindir}/*
+#{_sbindir}/*
 %{_bindir}/*
 %doc %{_mandir}/man1/*
