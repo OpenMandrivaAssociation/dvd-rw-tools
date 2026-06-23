@@ -26,6 +26,7 @@ Requires:	cdrkit-genisoimage
 
 BuildRequires:	make
 BuildRequires:  m4
+BuildRequires:  atomic-devel
 
 %description
 Even though a modified kernel can let you put for example an ext2 file
